@@ -108,25 +108,26 @@ export const SocialProfileSimple = ({ dataPage }: SocialProfileSimpleProps) => {
               direction={"row"}
               spacing={2}
             >
-              {social.map((item) => {
-                const active = !!dataPage["social-media"][item.name]?.active;
+              {!!dataPage["social-media"] &&
+                social.map((item) => {
+                  const active = !!dataPage["social-media"][item.name]?.active;
 
-                return active ? (
-                  <Box
-                    cursor={"pointer"}
-                    onClick={() =>
-                      (window.location.href =
-                        dataPage["social-media"][item.name]?.link)
-                    }
-                    key={item.name}
-                    color={item.color}
-                  >
-                    {item.icon}
-                  </Box>
-                ) : (
-                  <></>
-                );
-              })}
+                  return active ? (
+                    <Box
+                      cursor={"pointer"}
+                      onClick={() =>
+                        (window.location.href =
+                          dataPage["social-media"][item.name]?.link)
+                      }
+                      key={item.name}
+                      color={item.color}
+                    >
+                      {item.icon}
+                    </Box>
+                  ) : (
+                    <></>
+                  );
+                })}
             </Stack>
           </>
         )}

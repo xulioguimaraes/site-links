@@ -6,29 +6,31 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {
   data: IDataPage;
+  notFoundInfo?: boolean; //uma flag para quando não encontar nenhuma informação cadastrada.
 };
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<IDataPage>
+  res: NextApiResponse<Data>
 ) {
   let dataPage = {} as IDataPage;
+  let notFoundInfo = false;
   if (!!req.query.id) {
     try {
-      await get(
-        child(ref(database), "links/" + "bl3rD0tfx4dxj5QZZ9rHh0T4FrF3")
-      ).then((snapshot) => {
-        if (snapshot.exists()) {
-          let info = snapshot.val();
-          dataPage = info;
-        } else {
-          console.log("No data available");
+      await get(child(ref(database), "links/" + req.query.id)).then(
+        (snapshot) => {
+          if (snapshot.exists()) {
+            let info = snapshot.val();
+            dataPage = info;
+          } else {
+            notFoundInfo = true;
+          }
         }
-      });
+      );
     } catch (error) {
       console.log(error);
     }
   }
 
-  res.status(200).json(dataPage);
+  res.status(200).json({ data: dataPage, notFoundInfo });
 }
