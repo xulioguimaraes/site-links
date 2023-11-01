@@ -10,9 +10,8 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-import { useState, useEffect, ReactNode } from "react";
-import { child, get, ref, onValue, onChildChanged } from "firebase/database";
-import { database } from "@/services/firebase";
+import { useState } from "react";
+
 import { IDataPage } from "@/types/IDataPage";
 import { social } from "@/utils/mock-icons";
 
@@ -79,28 +78,30 @@ export const SocialProfileSimple = ({ dataPage }: SocialProfileSimpleProps) => {
 
             <Stack mt={8}>
               {!!dataPage?.buttons &&
-                Object.keys(dataPage?.buttons).map((item) => {
-                  const dataItem = dataPage.buttons[item];
+                Object.keys(dataPage?.buttons)
+                  .reverse()
+                  .map((item) => {
+                    const dataItem = dataPage.buttons[item];
 
-                  return (
-                    <Button
-                      key={item}
-                      fontSize={"sm"}
-                      rounded={"full"}
-                      position={"relative"}
-                      bg={dataItem.backgroundButton}
-                      color={dataItem.colorTextButton}
-                      boxShadow={
-                        "0px 1px 10px -5px rgb(66 153 225 / 48%), 0 0px 0px -5px rgb(66 153 225 / 43%)"
-                      }
-                      onClick={() => {
-                        window.location.href = dataItem.link;
-                      }}
-                    >
-                      {dataItem.name}
-                    </Button>
-                  );
-                })}
+                    return (
+                      <Button
+                        key={item}
+                        fontSize={"sm"}
+                        rounded={"full"}
+                        position={"relative"}
+                        bg={dataItem.backgroundButton}
+                        color={dataItem.colorTextButton}
+                        boxShadow={
+                          "0px 1px 10px -5px rgb(66 153 225 / 48%), 0 0px 0px -5px rgb(66 153 225 / 43%)"
+                        }
+                        onClick={() => {
+                          window.location.href = dataItem.link;
+                        }}
+                      >
+                        {dataItem.name}
+                      </Button>
+                    );
+                  })}
             </Stack>
             <Stack
               justifyContent={"center"}
