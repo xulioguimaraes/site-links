@@ -36,8 +36,6 @@ VITE_API_MEASURENT_ID=
 VITE_API_SITE_URL=
 ```
 
-> Habilite a opção de login com o Google no seu console do firebase
-
 ## Instalação
 
 Siga os passos abaixo para instalar as dependências e executar o projeto:
