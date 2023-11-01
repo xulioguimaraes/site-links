@@ -11,7 +11,6 @@ export default function Home({
   dataPage,
   notFoundInfo,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  console.log(dataPage);
   return (
     <>
       <Head>
