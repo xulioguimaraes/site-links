@@ -5,8 +5,9 @@ import { SocialProfileSimple } from "@/components/SocialProfileSimple/SocialProf
 
 import { IDataPage } from "@/types/IDataPage";
 import { api } from "@/services/api";
-import { Center, Heading, Text } from "@chakra-ui/react";
-
+import { Center, Link, Text } from "@chakra-ui/react";
+import LinkNext from "next/link";
+import { BiLinkExternal } from "react-icons/bi";
 export default function Home({
   dataPage,
   notFoundInfo,
@@ -35,6 +36,18 @@ export default function Home({
           </Center>
         )}
       </main>
+      <Center as="footer" position={"fixed"} bottom={0} left={0} right={0}>
+        <Link
+          as={LinkNext}
+          href="https://www.linkedin.com/in/xulioguimaraes/"
+          target="_blank"
+          isExternal
+          display={"flex"}
+          alignItems={"center"}
+        >
+          criado por xulio <BiLinkExternal mx="2px" />
+        </Link>
+      </Center>
     </>
   );
 }
